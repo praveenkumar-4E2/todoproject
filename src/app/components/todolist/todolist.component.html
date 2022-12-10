@@ -1,0 +1,92 @@
+<div class="container">
+
+    <tr class="tableHead">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <div class="itemsList" *ngFor="let data of items;index as i">
+        <app-view  (selectedItem)="fromChild($event)" (selectedItemEdit)="fromChildEdit($event)" [item]=(data)>
+        </app-view>
+        <button class="button-red" (click)="deleteItem(i)">Delete</button>
+    </div>
+   
+
+    <div class="wrap-view" *ngIf="showView">
+
+        <div class="display">
+            <div class="row">
+                <label>Id :</label>
+                {{childData.id}}
+            </div>
+            <div class="row">
+                <label>Name :</label>
+                {{childData.name}}
+            </div>
+            <div class="row">
+                <label>Description :</label>
+                {{childData.description}}
+            </div>
+            <div class="row">
+                <label>Due Date :</label>
+                {{childData.date}}
+            </div>
+            <div class="row">
+                <label>Status :</label>
+                {{childData.status}}
+            </div>
+            <button (click)="closeView()">Close</button>
+
+
+        </div>
+
+    </div>
+    
+    <div class="wrap-view" *ngIf="showForm">
+        <form #category="ngForm" (ngSubmit)="onSubmitSave(category)">
+
+            <div class="inputItem">
+
+                <label for="categoryId">Id</label>
+                <input type="text" id="categoryId" name="categoryId" [(ngModel)]="childData.id">
+            </div>
+            <div class="inputItem">
+
+                <label for="categoryName">category Name</label>
+                <input type="text" id="categoryName" name="categoryName" [(ngModel)]="childData.name">
+            </div>
+            <div class="inputItem">
+
+                <label for="categoryName">Description</label>
+                <input type="text" id="categoryName" name="categoryName" [(ngModel)]="childData.description">
+            </div>
+            <div class="inputItem">
+
+                <label for="categoryName">category</label>
+                <input type="text" id="categoryName" name="categoryName" [(ngModel)]="childData.category">
+            </div>
+            <div class="inputItem">
+
+                <label for="categoryName">Due Date</label>
+                <input type="text" id="categoryName" name="categoryName" [(ngModel)]="childData.duedate">
+            </div>
+            <div class="inputItem">
+
+                <label for="categoryName">status</label>
+                <input type="text" id="categoryName" name="categoryName" [(ngModel)]="childData.status">
+            </div>
+            <div class="inputItem">
+                <button type="submit">
+                    Save
+                </button>
+            </div>
+
+
+        </form>
+    </div>
+</div>
